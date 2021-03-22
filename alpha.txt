@@ -1,0 +1,101 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef struct{
+
+float real;
+
+float imag;
+
+}complex_t;
+
+complex_t add(complex_t, complex_t);
+complex_t sub(complex_t, complex_t);
+complex_t mul(complex_t, complex_t);
+complex_t division(complex_t, complex_t);
+int main()
+{
+    complex_t c1, c2;
+    c1.real=1.5;
+    c1.imag=6.2;
+    c2.real=2.8;
+    c2.imag=6.9;
+    complex_t A, S, M, D;
+    A=add(c1, c2);
+    printf("Sum = %.1f + %.1fi", A.real, A.imag);
+
+    S=sub(c1,c2);
+    if(S.imag>=0){
+    printf("\nDifference = %.1f + %.1fi", S.real, S.imag);
+    }
+    else{
+        printf("\nDifference = %.1f%.1fi", S.real, S.imag);
+    }
+
+    M=mul(c1,c2);
+    if(M.imag>=0){
+    printf("\nMultiplication = %.1f + %.1fi\n", M.real, M.imag);
+    }
+    else{
+        printf("\nMultiplication = %.1f%.1fi\n", M.real, M.imag);
+    }
+
+    D=division(c1,c2);
+}
+complex_t add(complex_t n1, complex_t n2){
+    complex_t temp;
+    temp.real=n1.real+n2.real;
+    temp.imag=n1.imag+n2.imag;
+    return(temp);
+
+}
+complex_t sub(complex_t n1, complex_t n2){
+    complex_t temp;
+    temp.real=n1.real-n2.real;
+    temp.imag=n1.imag-n2.imag;
+    return(temp);
+
+}
+complex_t mul(complex_t n1, complex_t n2){
+    complex_t temp;
+    temp.real=n1.real*n2.real - n1.imag*n2.imag;
+    temp.imag=n1.imag*n2.real + n1.real*n2.imag;
+    return(temp);
+
+}
+complex_t division(complex_t a, complex_t b){
+    complex_t temp;
+    int x,y,z;
+     x = a.real*b.real + a.imag*b.imag;
+     y = a.imag*b.real - a.real*b.imag;
+     z = b.real*b.real + b.imag*b.imag;
+     if (x%z == 0 && y%z == 0)
+        {
+          if (y/z >= 0)
+            printf("Division = %d + %di", x/z, y/z);
+          else
+            printf("Division = %d %di", x/z, y/z);
+        }
+        else if (x%z == 0 && y%z != 0)
+        {
+          if (y/z >= 0)
+            printf("Division = %d + %d/%di", x/z, y, z);
+          else
+            printf("Division = %d %d/%di", x/z, y, z);
+        }
+        else if (x%z != 0 && y%z == 0)
+        {
+          if (y/z >= 0)
+            printf("Division = %d/%d + %di", x, z, y/z);
+          else
+            printf("Division = %d %d/%di", x, z, y/z);
+        }
+        else
+        {
+          if (y/z >= 0)
+            printf("Division = %d/%d + %d/%di",x, z, y, z);
+          else
+            printf("Division = %d/%d %d/%di", x, z, y, z);
+        }
+      }
+
+
